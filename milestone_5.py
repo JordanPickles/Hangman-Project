@@ -45,6 +45,17 @@ class Hangman:
                 self.check_guess(guess) #If the guess passes through the previous conditions, guess is then checked through calling the check_guess() function
 
 
+def play_game():
+    word_list = ["pineapple", "banana", "strawberry", "grape", "orange"]
+    num_lives = 5
+    game = Hangman(word_list, num_lives)
+    while True:
+        if game.num_lives == 0:
+             print(f"You lost!, the word was{game.word}")    
+        elif game.num_letters > 0:
+            game.ask_for_input()
+        elif game.num_lives != 0 and game.num_letters == 0:
+            print(f"Congratulations, you won. The word was {game.word}")
+        break
 
-
-
+play_game()
