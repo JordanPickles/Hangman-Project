@@ -35,7 +35,7 @@ class Hangman:
         
    
     def ask_for_input(self): # Asking for input function defined with no argument
-        while True: # Used to make the continuous loop which will only break if the below if statement is true 
+        while True: # Used to make the continuous loop which will break when the user input is valid
             guess = input("Please enter a letter") # Requires an input from the user
             if len(guess) != 1 or guess.isalpha() == False: # Checks the input from the user is valid
                 print("Invalid letter. Please, enter a single alphabetical character.")
@@ -43,19 +43,20 @@ class Hangman:
                 print("You already tried that letter!")            
             else:
                 self.check_guess(guess) #If the guess passes through the previous conditions, guess is then checked through calling the check_guess() function
-
+                break
 
 def play_game():
-    word_list = ["pineapple", "banana", "strawberry", "grape", "orange"]
-    num_lives = 5
-    game = Hangman(word_list, num_lives)
+    word_list = ["pineapple", "banana", "strawberry", "grape", "orange"] # This parameter defines the word list variable
+    num_lives = 5 # This parameter defines the number of lives the player has in the game
+    game = Hangman(word_list, num_lives) #Creates an instance of the game and passes word_list and num_lives as arguments
     while True:
-        if game.num_lives == 0:
-             print(f"You lost!, the word was{game.word}")    
-        elif game.num_letters > 0:
+        if game.num_lives == 0: # Condition for when the player has lost in the game
+            print(f"You lost!, the word was{game.word}")    
+            break
+        elif game.num_letters > 0: # Condition for when the user is asked for another input
             game.ask_for_input()
-        elif game.num_lives != 0 and game.num_letters == 0:
+        elif game.num_lives != 0 and game.num_letters == 0: #Condition for when the user has won the game
             print(f"Congratulations, you won. The word was {game.word}")
-        break
+            break
 
 play_game()
